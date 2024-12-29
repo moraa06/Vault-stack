@@ -37,7 +37,7 @@ This will preserve any persistent data under `/vw-data/`, you can adapt the path
 
 ### Docker Compose
 
-To use Docker compose you need to create a `compose.yaml` which will hold the configuration to run the Vaultwarden container.
+To use Docker compose you need to create a `compose.yaml` which will hold the configuration to run the Vaultwarden Full Stack app container and backup container.
 
 ```yaml
 services:

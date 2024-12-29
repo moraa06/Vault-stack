@@ -1,0 +1,71 @@
+services:
+  app:
+    image: vaultwarden/server:latest
+    volumes:
+      - vaultwarden_data:/data
+    restart: always
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+
+      - DOMAIN=http://vaultwarden.local.com
+      - LOGIN_RATELIMIT_MAX_BURST=10
+      - LOGIN_RATELIMIT_SECONDS=60
+      - ADMIN_RATELIMIT_MAX_BURST=10
+      - ADMIN_RATELIMIT_SECONDS=60
+      - ADMIN_TOKEN=P@ssw0rd
+      - SENDS_ALLOWED=true
+      - EMERGENCY_ACCESS_ALLOWED=true
+      - WEB_VAULT_ENABLED=true
+
+      - SIGNUPS_ALLOWED=false
+      - SIGNUPS_VERIFY=true
+      - SIGNUPS_VERIFY_RESEND_TIME=3600
+      - SIGNUPS_VERIFY_RESEND_LIMIT=5
+      - SIGNUPS_DOMAINS_WHITELIST=egidegypt.com
+
+      - SMTP_HOST=SMTP@local.com
+      - SMTP_FROM=vaultwarden@local.com
+      - SMTP_FROM_NAME=Vaultwarden
+      - SMTP_SECURITY=off
+      - SMTP_PORT=25
+      # - SMTP_USERNAME=vaultwarden@local.com
+      # - SMTP_PASSWORD=
+      # - SMTP_AUTH_MECHANISM="Mechanism"
+
+    ports:
+      - 80:80
+    networks:
+      - vaultwarden-network
+
+
+  backup:
+      image: bruceforce/bw_backup:latest
+      restart: on-failure
+      depends_on:
+        - app
+      volumes:
+        - vaultwarden_data:/data
+        - vaultwarden_backup:/backup
+        - '/etc/timezone:/etc/timezone:ro'
+        - '/etc/localtime:/etc/localtime:ro'
+
+      environment:
+        - DB_FILE=/data/db.sqlite3
+        - BACKUP_FILE=/backup/backup.sqlite3
+        - BACKUP_FILE_PERMISSIONS=700
+        - CRON_TIME=0 1 * * *
+        - DELETE_AFTER = 48
+        - TIMESTAMP=true
+        - UID=0
+        - GID=0
+
+      networks:
+        - vaultwarden-network
+volumes:
+  vaultwarden_data:
+  vaultwarden_backup:
+
+networks:
+  vaultwarden-network:
+    driver: bridge

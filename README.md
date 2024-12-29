@@ -1,4 +1,4 @@
-![Vaultwarden Logo](./resources/vaultwarden-logo-auto.svg)
+### Vaultwarden
 
 
 ## Usage

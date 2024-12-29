@@ -1,5 +1,5 @@
 ![Vaultwarden Logo](./resources/vaultwarden-logo-auto.svg)
-
+<br>
 ## Usage
 
 > [!IMPORTANT]

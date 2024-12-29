@@ -39,6 +39,7 @@ To use Docker compose you need to create a compose.yaml which will hold the conf
 services:
 
   vaultwarden:
+  
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: unless-stopped

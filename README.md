@@ -36,10 +36,9 @@ Docker Compose
 
 To use Docker compose you need to create a compose.yaml which will hold the configuration to run the Vaultwarden container.
 
-services:
 
+services"
   vaultwarden:
-  
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: unless-stopped

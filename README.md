@@ -17,6 +17,7 @@ You can replace docker with podman if you prefer to use podman.
 
 
 docker pull vaultwarden/server:latest
+
 docker run --detach --name vaultwarden \
   --env DOMAIN="https://vw.domain.tld" \
   --volume /vw-data/:/data/ \

@@ -14,30 +14,29 @@ For more detailed examples on how to install, use and configure Vaultwarden you 
 The main way to use Vaultwarden is via our container images which are published to ghcr.io, docker.io and quay.io.
 There are also community driven packages which can be used, but those might be lagging behind the latest version or might deviate in the way Vaultwarden is configured, as described in our Wiki.
 
+### Docker/Podman CLI
 
-Docker/Podman CLI
-Pull the container image and mount a volume from the host for persistent storage.
-You can replace docker with podman if you prefer to use podman.
+Pull the container image and mount a volume from the host for persistent storage.<br>
+You can replace `docker` with `podman` if you prefer to use podman.
 
-
+```shell
 docker pull vaultwarden/server:latest
-
 docker run --detach --name vaultwarden \
-
   --env DOMAIN="https://vw.domain.tld" \
   --volume /vw-data/:/data/ \
   --restart unless-stopped \
   --publish 80:80 \
   vaultwarden/server:latest
+```
 
+This will preserve any persistent data under `/vw-data/`, you can adapt the path to whatever suits you.
 
+### Docker Compose
 
-Docker Compose
+To use Docker compose you need to create a `compose.yaml` which will hold the configuration to run the Vaultwarden container.
 
-To use Docker compose you need to create a compose.yaml which will hold the configuration to run the Vaultwarden container.
-
-
-services"
+```yaml
+services:
   vaultwarden:
     image: vaultwarden/server:latest
     container_name: vaultwarden
@@ -48,3 +47,4 @@ services"
       - ./vw-data/:/data/
     ports:
       - 80:80
+```

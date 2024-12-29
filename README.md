@@ -1,4 +1,4 @@
-VaultWarden
+### VaultWarden
 
 Usage
 

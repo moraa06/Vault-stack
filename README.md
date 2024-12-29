@@ -24,7 +24,6 @@ An alternative server implementation of the Bitwarden Client API, written in Rus
 > [!IMPORTANT]
 > **When using this server, please report any bugs or suggestions directly to us (see [Get in touch](#get-in-touch)), regardless of whatever clients you are using (mobile, desktop, browser...). DO NOT use the official Bitwarden support channels.**
 
-<br>
 
 ## Usage
 
